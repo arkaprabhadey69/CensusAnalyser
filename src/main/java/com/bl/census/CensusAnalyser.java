@@ -40,9 +40,25 @@ public class CensusAnalyser {
 
     }
 
+    public int loadIndiaStateOrCensusDataUsingCommonsCSV(String csvFilePath) throws CensusAnalyserException {
+        try (Reader reader = Files.newBufferedReader(Paths.get(csvFilePath));) {
+            Iterator<CSVRecord> records = CSVFormat.DEFAULT.withFirstRecordAsHeader()
+                    .withIgnoreHeaderCase()
+                    .withTrim()
+                    .parse(reader)
+                    .iterator();
+            return this.getCount(records);
+        } catch (IOException | RuntimeException e) {
+            throw new CensusAnalyserException(e.getMessage(),
+                    CensusAnalyserException.ExceptionType.CENSUS_FILE_PROBLEM);
+        }
+
+    }
+
     public <E> int getCount(Iterator<E> csvIterator) {
         Iterable<E> csvIterable = () -> csvIterator;
         return (int) StreamSupport.stream(csvIterable.spliterator(), false).count();
     }
+
 
 }
