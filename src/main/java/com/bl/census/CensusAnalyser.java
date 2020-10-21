@@ -1,7 +1,10 @@
 package com.bl.census;
 
+import com.bl.jar.CSVBuilderException;
 import com.opencsv.bean.CsvToBean;
 import com.opencsv.bean.CsvToBeanBuilder;
+import org.apache.commons.csv.CSVFormat;
+import org.apache.commons.csv.CSVRecord;
 
 import java.io.IOException;
 import java.io.Reader;
@@ -20,7 +23,7 @@ public class CensusAnalyser {
             Iterator<IndiaCensusCSV> censusCSVIterator = CSVBuilderFactory.createCSVBuilder().getCSVFileIterator(reader, IndiaCensusCSV.class);
             return this.getCount(censusCSVIterator);
 
-        } catch (IOException | RuntimeException e) {
+        } catch (IOException | RuntimeException | CSVBuilderException e) {
             throw new CensusAnalyserException(e.getMessage(),
                     CensusAnalyserException.ExceptionType.CENSUS_FILE_PROBLEM);
         }
@@ -30,7 +33,7 @@ public class CensusAnalyser {
         try (Reader reader = Files.newBufferedReader(Paths.get(csvFilePath));) {
             Iterator<IndiaStateCSV> censusCSVIterator = CSVBuilderFactory.createCSVBuilder().getCSVFileIterator(reader, IndiaStateCSV.class);
             return this.getCount(censusCSVIterator);
-        } catch (IOException | RuntimeException e) {
+        } catch (IOException | RuntimeException | CSVBuilderException e) {
             throw new CensusAnalyserException(e.getMessage(),
                     CensusAnalyserException.ExceptionType.CENSUS_FILE_PROBLEM);
         }
