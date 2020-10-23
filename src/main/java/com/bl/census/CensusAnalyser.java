@@ -98,7 +98,7 @@ public class CensusAnalyser {
                     CensusAnalyserException.ExceptionType.FILE_OR_HEADER_PROBLEM);
         }
     }
-
+    //MethodToReturnJSONFileOfStatesAccordingToStateCode
     public String getStateCodeWiseSortedCensusData() throws CensusAnalyserException {
         try (Writer writer = new FileWriter("./src/test/resources/IndiaStateCodeDataJson.json")) {
             if (stateCSVList== null || stateCSVList.size() == 0) {
@@ -116,6 +116,7 @@ public class CensusAnalyser {
                     CensusAnalyserException.ExceptionType.FILE_OR_HEADER_PROBLEM);
         }
     }
+    //MethodToReturnJSONFileOfStatesAccordingToPopulation
 
     public String getPopulationWiseSortedCensusData() throws CensusAnalyserException {
         try (Writer writer = new FileWriter("./src/test/resources/IndiaStatePopulationDataJson.json")) {
@@ -134,7 +135,7 @@ public class CensusAnalyser {
                     CensusAnalyserException.ExceptionType.FILE_OR_HEADER_PROBLEM);
         }
     }
-
+    //MethodToReturnJSONFileOfStatesAccordingToPopulationDensity
     public String getPopulationDensityWiseSortedCensusData() throws CensusAnalyserException {
         try (Writer writer = new FileWriter("./src/test/resources/IndiaStatePopulationDensityDataJson.json")) {
             if (censusCSVList == null || censusCSVList.size() == 0) {
@@ -153,7 +154,7 @@ public class CensusAnalyser {
         }
     }
 
-
+    //MethodToReturnJSONFileOfStatesAccordingToArea
     public String getAreaWiseSortedCensusData() throws CensusAnalyserException {
         try (Writer writer = new FileWriter("./src/test/resources/IndiaStateAreaDataJson.json")) {
             if (censusCSVList == null || censusCSVList.size() == 0) {
@@ -174,7 +175,7 @@ public class CensusAnalyser {
 
 
 
-
+//MethodToImplementComparator
     private void sort(Comparator<IndiaCensusCSV> censusComparator) {
         for (int i = 0; i < censusCSVList.size() - 1; i++) {
             for (int j = 0; j < censusCSVList.size() - i - 1; j++) {
@@ -187,6 +188,7 @@ public class CensusAnalyser {
             }
         }
     }
+    //MethodToSortInReverseOrder
     private void descendingSort(Comparator<IndiaCensusCSV> censusComparator) {
         for (int i = 0; i < censusCSVList.size() - 1; i++) {
             for (int j = 0; j < censusCSVList.size() - i - 1; j++) {
